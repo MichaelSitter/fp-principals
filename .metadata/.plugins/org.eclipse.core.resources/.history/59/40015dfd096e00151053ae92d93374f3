@@ -1,0 +1,6 @@
+package week4
+
+object List {
+  def List()
+  def List(x: Int)
+}

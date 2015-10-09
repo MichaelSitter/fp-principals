@@ -1,0 +1,11 @@
+import week4._
+
+object nth {
+  def nth[T](n: Int, list: List[T]): T = {
+    if (n < 0 || n > list.length) throw new IndexOutOfBoundsException()
+    if (n == 0) list.head
+    else nth(n - 1, list.tail)
+	}                                         //> nth: [T](n: Int, list: week4.List[T])T
+	
+	val list = new Cons(1, new Cons(2, new Cons(3, new Nil))))
+}

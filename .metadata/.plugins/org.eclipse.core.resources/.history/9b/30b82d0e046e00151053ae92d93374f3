@@ -1,0 +1,5 @@
+package week3
+
+class Conslist {
+  def Conslist(elm: Any, tail: Conslist)
+}
