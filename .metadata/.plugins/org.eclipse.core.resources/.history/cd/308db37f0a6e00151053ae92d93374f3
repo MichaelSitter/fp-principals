@@ -1,6 +1,0 @@
-import week4._
-
-object List {
-  def List() = new Nil[Int]
-  def List(x: Int) = new Cons(1, new Nil)
-}

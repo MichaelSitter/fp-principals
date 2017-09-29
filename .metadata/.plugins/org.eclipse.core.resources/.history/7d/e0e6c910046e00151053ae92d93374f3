@@ -1,8 +1,0 @@
-package week3
-
-trait IntList {
-  
-}
-class Conslist {
-  def Conslist(elm: Any, tail: Conslist)
-}

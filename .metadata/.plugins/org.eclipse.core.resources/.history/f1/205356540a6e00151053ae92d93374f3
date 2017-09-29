@@ -1,7 +1,0 @@
-package week4
-import week4._
-
-object List {
-  def List[T]() = new Nil[T]
-  def List(
-}

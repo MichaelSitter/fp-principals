@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;progfun/src/week3/data.sc&apos; to &apos;rationals.sc&apos;" description="Rename resource &apos;data.sc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/week3/data.sc" name="rationals.sc" stamp="1443736024321" updateReferences="true"/>&#x0A;<refactoring accessors="true" comment="Delete element from project &apos;progfun&apos;&#x0A;- Original project: &apos;progfun&apos;&#x0A;- Original element: &apos;rationals.sc&apos;" description="Delete element" element1="src/week3/rationals.sc" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="1" stamp="1443736230222" subPackages="false" version="1.0"/>
-</session>
