@@ -15,5 +15,5 @@ project/
 .scala_dependencies
 .worksheet
 
-.metadata
+.metadata/**
 bin
