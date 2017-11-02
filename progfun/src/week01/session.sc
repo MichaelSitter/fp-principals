@@ -30,4 +30,6 @@ object session {
 			x * factorial(x - 1)
 	}                                         //> factorial: (x: Int)Int
 	factorial(5)                              //> res3: Int = 120
+
+	def test = List(1,23,3)
 }
