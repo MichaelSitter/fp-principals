@@ -80,6 +80,30 @@ class BloxorzSuite extends FunSuite {
     }
   }
 
+  test("start block") {
+    new Level1 {
+      assert(startBlock === Block(Pos(1,1), Pos(1,1)))
+      assert(startBlock !== Block(Pos(2,2), Pos(2,2)))
+    }
+  }
+
+  test("neighbours") {
+    new Level1 {
+      assert(startBlock.neighbors.contains((startBlock.left, Left)))
+      assert(startBlock.neighbors.contains((startBlock.right, Right)))
+      assert(startBlock.neighbors.contains((startBlock.up, Up)))
+      assert(startBlock.neighbors.contains((startBlock.down, Down)))
+    }
+  }
+
+  test("legal neighbours") {
+    new Level1 {
+      val b = Block(Pos(0,0), Pos(0,0))
+      assert(b.legalNeighbors.contains((b.down, Down)))
+      assert(b.legalNeighbors.contains((b.right, Right)))
+      assert(!b.legalNeighbors.contains((b.up, Up)))
+    }
+  }
 
 	test("optimal solution for level 1") {
     new Level1 {
