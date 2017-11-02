@@ -105,6 +105,15 @@ class BloxorzSuite extends FunSuite {
     }
   }
 
+  test("done") {
+    new Level1 {
+      val goalBlock = Block(Pos(4,7), Pos(4,7))
+      val tippedBlock = Block(Pos(4,7), Pos(4,8))
+      assert(done(goalBlock))
+      assert(!done(tippedBlock))
+    }
+  }
+
 	test("optimal solution for level 1") {
     new Level1 {
       assert(solve(solution) == Block(goal, goal))
