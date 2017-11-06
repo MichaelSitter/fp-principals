@@ -127,6 +127,13 @@ trait GameDef {
                else if (b1.row == b2.row)  deltaRow(1, 1)
                else                        deltaRow(2, 1)
 
+    def move = (m: Move) => m match {
+      case Left => left
+      case Right => right
+      case Up => up
+      case Down => down
+    }
+
     /**
      * Returns the list of blocks that can be obtained by moving
      * the current block, together with the corresponding move.
