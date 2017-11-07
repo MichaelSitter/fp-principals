@@ -29,7 +29,7 @@ trait Solver extends GameDef {
    * that are inside the terrain.
    */
   def neighborsWithHistory(b: Block, history: List[Move]): Stream[(Block, List[Move])] =
-    b.legalNeighbors.map {op => (op._1, op._2 +: history)}.toStream
+    b.legalNeighbors.map(op => (op._1, op._2 :: history)).toStream
 
   /**
    * This function returns the list of neighbors without the block
@@ -38,7 +38,7 @@ trait Solver extends GameDef {
    */
   def newNeighborsOnly(neighbors: Stream[(Block, List[Move])],
                        explored: Set[Block]): Stream[(Block, List[Move])] =
-    neighbors.filter(n => !explored.contains(n._1))
+    neighbors.filter(n => !explored(n._1))
 
   /**
    * The function `from` returns the stream of all possible paths
@@ -64,15 +64,16 @@ trait Solver extends GameDef {
    * construct the correctly sorted stream.
    */
   def from(initial: Stream[(Block, List[Move])],
-           explored: Set[Block]): Stream[(Block, List[Move])] =
+           explored: Set[Block]): Stream[(Block, List[Move])] = {
     if (initial.isEmpty) Stream.empty
     else {
-      val more = for {
-        step <- initial
-        next <- newNeighborsOnly (neighborsWithHistory(step._1, step._2), explored)
-      } yield next
-      initial #::: from(more, explored ++ (more.map(_._1)))
+      val nextState = for {
+          step: (Block, List[Move]) <- initial
+          next: (Block, List[Move]) <- newNeighborsOnly(neighborsWithHistory(step._1, step._2), explored)
+        } yield next
+      from(nextState, explored ++ nextState.map(_._1)) #::: initial
     }
+  }
 
   /**
    * The stream of all paths that begin at the starting block.
@@ -84,9 +85,7 @@ trait Solver extends GameDef {
    * Returns a stream of all possible pairs of the goal block along
    * with the history how it was reached.
    */
-  lazy val pathsToGoal: Stream[(Block, List[Move])] = pathsFromStart.filter(p => {
-    done(p._1)
-  })
+  lazy val pathsToGoal: Stream[(Block, List[Move])] = pathsFromStart.filter(state => done(state._1))
 
   /**
    * The (or one of the) shortest sequence(s) of moves to reach the
@@ -96,8 +95,9 @@ trait Solver extends GameDef {
    * the first move that the player should perform from the starting
    * position.
    */
-  lazy val solution: List[Move] = pathsToGoal.headOption match {
-    case None => List.empty
-    case Some(solution) => (solution._2).reverse
-  }
+  lazy val solution: List[Move] =
+    if (pathsToGoal.isEmpty) List.empty
+    else {
+      pathsToGoal.head._2.reverse
+    }
 }
