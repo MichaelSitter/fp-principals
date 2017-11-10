@@ -12,3 +12,5 @@ libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.12.1"
 commonSourcePackages += "common"
 
 courseId := "PeZYFz-zEeWB_AoW1KYI4Q"
+
+testOptions in Test += Tests.Argument(TestFrameworks.ScalaCheck, "-verbosity", "2")
